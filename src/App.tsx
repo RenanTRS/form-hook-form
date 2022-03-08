@@ -1,8 +1,12 @@
+import { Main } from "./components/Main"
+import { Form } from "./components/Form"
 
 function App() {
   return (
-    <div className="App">
-    </div>
+    <Main>
+      <h2>Form Hook Form</h2>
+      <Form />
+    </Main>
   )
 }
 
