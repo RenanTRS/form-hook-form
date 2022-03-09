@@ -5,7 +5,8 @@ import {yupResolver} from '@hookform/resolvers/yup'
 import {Container} from './style'
 import { Field } from './Field'
 import { useMask } from '../../hooks/useMask'
-import { FormEvent, useCallback } from 'react';
+import { useFetch } from '../../hooks/useFetch'
+import { FormEvent, useCallback } from 'react'
 
 export const Form = () => {
 
@@ -20,7 +21,7 @@ export const Form = () => {
         street?: string;
         number?: string;
     }
-    const {register, handleSubmit, formState: {errors}} = useForm<FormInputType>({resolver: yupResolver(schema)});
+    const {register, handleSubmit, watch, formState: {errors}} = useForm<FormInputType>({resolver: yupResolver(schema)});
     
     const newUser = (data: FormInputType) => {
         console.log(data)
@@ -28,6 +29,15 @@ export const Form = () => {
     const handleMask = useCallback((event: FormEvent<HTMLInputElement>)=>{
         useMask(event)
     },[])
+
+    const getData = async (event: FormEvent<HTMLInputElement>) => {
+        let {value} = event.currentTarget
+        value = value.replace(/\D/g, '')
+        if(value.length === 8){
+            const data = await useFetch(`https://viacep.com.br/ws/${value}/json/`)
+            //console.log(data)
+        }
+    }
 
     return (
         <Container onSubmit={handleSubmit(newUser)}>
