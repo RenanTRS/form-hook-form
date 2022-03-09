@@ -6,6 +6,7 @@ export default {
         error: '#ae2012',
         submit: '#fca311',
         submitHover: '#f48c06',
-        submitText: '#fff'
+        submitText: '#fff',
+        select: '#ebebeb'
     }
 }

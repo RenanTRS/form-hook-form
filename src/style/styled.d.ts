@@ -9,6 +9,7 @@ declare module 'styled-components'{
             submit: string;
             submitHover: string;
             submitText: string;
+            select: string;
         }
     }
 }
