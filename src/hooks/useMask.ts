@@ -2,7 +2,6 @@ import { FormEvent } from 'react';
 
 export const useMask = (event: FormEvent<HTMLInputElement>) => {
     const {name} = event.currentTarget
-    console.log(name)
     if(name === 'cpf'){
         let {value} = event.currentTarget
         value = value?.replace(/\D/g, '')
