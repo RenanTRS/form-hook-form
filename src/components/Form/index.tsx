@@ -7,6 +7,7 @@ import { Field } from './Field'
 import { useMask } from '../../hooks/useMask'
 import { useFetch } from '../../hooks/useFetch'
 import { FormEvent, useCallback } from 'react'
+import { SelectBlock } from './Field/style';
 
 export const Form = () => {
 
@@ -49,9 +50,11 @@ export const Form = () => {
 
             <Field.Text label={'cep'} labelName={'CEP'} register={register('cep',{onBlur:getData})} error={errors.cep?.message} onchange={handleMask} maxlength={9} />
 
-            <Field.Select label={'uf'} labelName={'Estado'} register={register('uf')} />
+            <SelectBlock>
+                <Field.Select label={'uf'} labelName={'Estado'} register={register('uf')} />
 
-            <Field.Select label={'city'} labelName={'Cidade'} register={register('city')} />
+                <Field.Select label={'city'} labelName={'Cidade'} register={register('city')} />
+            </SelectBlock>
 
             <Field.Text label={'district'} labelName={'Bairro'} register={register('district')} />
 
