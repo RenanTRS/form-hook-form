@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { schema } from '../../services/schema';
 import {yupResolver} from '@hookform/resolvers/yup'
 import {Container} from './style'
+
 export const Form = () => {
 
     type FormInputType = {

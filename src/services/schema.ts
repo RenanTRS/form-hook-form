@@ -1,9 +1,13 @@
+import { validateCPF } from 'validations-br';
 import * as yup from 'yup'
-//import {yupResolver} from '@hookform/resolvers/yup'
+
 export const schema = yup.object({
     name: yup.string().required('O campo nome é obrigatório'),
     email: yup.string().email('Digite um email válido').required('O campo email é obrigatório'),
-    cpf: yup.string().required('O campo cpf é obrigatório'),
+    cpf: yup.string().required('O campo cpf é obrigatório').test('is-cpf', 'Digite um cpf válido', async function(value){
+        const {cpf} = this.parent;
+        return validateCPF(cpf)
+    }),
     cep: yup.string().required('O campo cep é obrigatório'),
     uf: yup.string(),
     city: yup.string(),
