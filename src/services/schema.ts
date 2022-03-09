@@ -1,3 +1,4 @@
+import { validateCEP } from './validateCEP';
 import { validateCPF } from 'validations-br';
 import * as yup from 'yup'
 
@@ -8,7 +9,10 @@ export const schema = yup.object({
         const {cpf} = this.parent;
         return validateCPF(cpf)
     }),
-    cep: yup.string().required('O campo cep é obrigatório'),
+    cep: yup.string().required('O campo cep é obrigatório').test('is-cep', 'Digite um cep válido', async function(value){
+        const {cep} = this.parent;
+        return validateCEP(cep)
+    }),
     uf: yup.string(),
     city: yup.string(),
     district: yup.string(),
