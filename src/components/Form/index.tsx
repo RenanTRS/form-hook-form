@@ -37,7 +37,7 @@ export const Form = () => {
 
             <Field.Text label={'cpf'} labelName={'CPF'} register={register('cpf')} error={errors.cpf?.message} onchange={handleMask} maxlength={14} />
 
-            <Field.Text label={'cep'} labelName={'CEP'} register={register('cep')} error={errors.cep?.message} onchange={handleMask} maxlength={9} />
+            <Field.Text label={'cep'} labelName={'CEP'} register={register('cep',{onBlur:getData})} error={errors.cep?.message} onchange={handleMask} maxlength={9} />
 
             <Field.Select label={'uf'} labelName={'Estado'} register={register('uf')} />
 
