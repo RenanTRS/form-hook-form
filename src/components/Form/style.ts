@@ -6,4 +6,8 @@ export const Container = styled.form`
     background: ${props => props.theme.colors.container};
 
     padding: 2rem;
+
+    border-radius: 1rem;
+
+    width: 50%;
 `
