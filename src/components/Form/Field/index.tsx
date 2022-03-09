@@ -1,15 +1,19 @@
+import { FormEvent } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 type InputProps = {
     label: string;
     labelName: string;
-    register?: UseFormRegisterReturn; //por enquanto
+    register?: UseFormRegisterReturn;
     error?: string;
+    onchange?: (event: FormEvent<HTMLInputElement>) => void;
+    maxlength?: number;
 }
-const Text = ({label, labelName, register, error}: InputProps) => {
+
+const Text = ({label, labelName, register, error, onchange, maxlength}: InputProps) => {
     return (
         <>
             <label htmlFor={label}>{labelName}</label>
-            <input type="text" {...register} id={label} />
+            <input type="text" {...register} id={label} onChange={onchange} maxLength={maxlength} />
             {error && <p>{error}</p>}
         </>
     )
