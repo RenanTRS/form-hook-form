@@ -9,6 +9,7 @@ export const Main = styled.main`
 
     min-height: 100vh;
     width: 100%;
+    padding: 2rem;
 
     h2{
         color: $${props => props.theme.colors.text};
