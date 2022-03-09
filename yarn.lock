@@ -882,6 +882,11 @@ typescript@^4.5.4:
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.6.2.tgz#fe12d2727b708f4eef40f51598b3398baa9611d4"
   integrity sha512-HM/hFigTBHZhLXshn9sN37H085+hQGeJHJ/X7LpBWLID/fbc2acUMfU+lGD98X81sKP+pFa9f0DZmCwB9GnbAg==
 
+validations-br@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/validations-br/-/validations-br-1.2.0.tgz#254c3a7982667cada8935e633c7a4168e1d98de1"
+  integrity sha512-BHoRZMH+GklOObdxnqatyo0JxpiKxzzRwLHOHAbSeBJ1REB5yBietcmyMK7pR7JwzWuLiU2CwTF/xpY7CmP7XQ==
+
 vite@^2.8.0:
   version "2.8.6"
   resolved "https://registry.yarnpkg.com/vite/-/vite-2.8.6.tgz#32d50e23c99ca31b26b8ccdc78b1d72d4d7323d3"

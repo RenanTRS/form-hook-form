@@ -1,9 +1,12 @@
-import { Field } from './Field'
-
 import { useForm } from 'react-hook-form'
 import { schema } from '../../services/schema';
 import {yupResolver} from '@hookform/resolvers/yup'
+
 import {Container} from './style'
+import { Field } from './Field'
+import { useMask } from '../../hooks/useMask'
+import { FormEvent, useCallback } from 'react';
+
 export const Form = () => {
 
     type FormInputType = {
@@ -22,6 +25,9 @@ export const Form = () => {
     const newUser = (data: FormInputType) => {
         console.log(data)
     }
+    const handleMask = useCallback((event: FormEvent<HTMLInputElement>)=>{
+        useMask(event)
+    },[])
 
     return (
         <Container onSubmit={handleSubmit(newUser)}>
@@ -29,9 +35,9 @@ export const Form = () => {
             
             <Field.Text label={'email'} labelName={'Email'} register={register('email')} error={errors.email?.message}/>
 
-            <Field.Text label={'cpf'} labelName={'CPF'} register={register('cpf')} error={errors.cpf?.message} />
+            <Field.Text label={'cpf'} labelName={'CPF'} register={register('cpf')} error={errors.cpf?.message} onchange={handleMask} maxlength={14} />
 
-            <Field.Text label={'cep'} labelName={'CEP'} register={register('cep')} error={errors.cep?.message} />
+            <Field.Text label={'cep'} labelName={'CEP'} register={register('cep')} error={errors.cep?.message} onchange={handleMask} maxlength={9} />
 
             <Field.Select label={'uf'} labelName={'Estado'} register={register('uf')} />
 
