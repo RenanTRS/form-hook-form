@@ -1,5 +1,6 @@
 import { FormEvent } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
+import { InputBlock } from "./style";
 type InputProps = {
     label: string;
     labelName: string;
@@ -11,28 +12,23 @@ type InputProps = {
 
 const Text = ({label, labelName, register, error, onchange, maxlength}: InputProps) => {
     return (
-        <>
+        <InputBlock>
             <label htmlFor={label}>{labelName}</label>
             <input type="text" {...register} id={label} onChange={onchange} maxLength={maxlength} />
             {error && <p>{error}</p>}
-        </>
+        </InputBlock>
     )
 }
-const Cpf = () => {
-    return (
-        <>
-        </>
-    )
-}
+
 const Select = ({label, labelName, register}: InputProps) => {
     return(
-        <>
+        <div>
             <label htmlFor={label}>{labelName}</label>
             <select {...register} id={label}>
                 <option value="">Selecione um valor</option>
                 <option value="1">Algo 1</option>
             </select>
-        </>
+        </div>
     )
 }
 export const Field = {Text, Select}
