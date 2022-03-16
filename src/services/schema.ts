@@ -5,12 +5,22 @@ import * as yup from 'yup'
 export const schema = yup.object({
     name: yup.string().required('O campo nome é obrigatório'),
     email: yup.string().email('Digite um email válido').required('O campo email é obrigatório'),
-    cpf: yup.string().required('O campo cpf é obrigatório').test('is-cpf', 'Digite um cpf válido', async function(value){
+    /*cpf: yup.string().required('O campo cpf é obrigatório').test('is-cpf', 'Digite um cpf válido', async function(value){
         const {cpf} = this.parent;
         return validateCPF(cpf)
+    }),*/
+    cpf: yup.string().required('O campo cpf é obrigatório').test('is-cpf', 'Digite um cpf válido', async (value)=>{
+        const cpf = String(value)
+        return validateCPF(cpf)
     }),
+    /*
     cep: yup.string().required('O campo cep é obrigatório').test('is-cep', 'Digite um cep válido', async function(value){
         const {cep} = this.parent;
+        return validateCEP(cep)
+    }),
+    */
+    cep: yup.string().required('O campo cep é obrigatório').test('is-cep', 'Digite um cep válido', async (value)=>{
+        const cep = String(value)
         return validateCEP(cep)
     }),
     uf: yup.string(),
