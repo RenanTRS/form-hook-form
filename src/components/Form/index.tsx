@@ -27,8 +27,15 @@ export const Form = () => {
         let {value} = event.currentTarget
         value = value.replace(/\D/g, '')
         if(value.length === 8){
-            const data = await useFetch(`https://viacep.com.br/ws/${value}/json/`)
-            console.log(data)
+            const data = await useFetch(`https://viacep.com.br/ws/${value}/json/`) //Check cep
+            
+            await populateCity(data.uf) //Take cities
+            
+            //Set input values
+            setValue('uf', data.uf)
+            setValue('city', data.localidade)
+            setValue('district', data.bairro)
+            setValue('street', data.logradouro)
         }
         //Pendente ....
     }
