@@ -6,30 +6,40 @@ import {Container} from './style'
 import { Field } from './Field'
 import { useMask } from '../../hooks/useMask'
 import { useFetch } from '../../hooks/useFetch'
-import { FormEvent, useCallback } from 'react'
+import { FormEvent, useCallback, useContext } from 'react'
+import { SelectContext } from '../../context/SelectContext';
 import { SelectBlock } from './Field/style';
 import { FormInputType } from '../../types/Form';
 import { SelectState, SelectCity } from './Field/Selects';
-import { SelectContextProvider } from '../../context/SelectContext';
 
 export const Form = () => {
-    const {register, handleSubmit, formState: {errors}} = useForm<FormInputType>({resolver: yupResolver(schema)});
+    const {register, handleSubmit, setValue, formState: {errors}} = useForm<FormInputType>({resolver: yupResolver(schema)});
     
     const newUser = (data: FormInputType) => {
         console.log(data)
     }
+
+    //Masks
     const handleMask = useCallback((event: FormEvent<HTMLInputElement>)=>{
         useMask(event)
     },[])
     
+    const {populateCity} = useContext(SelectContext) //Context
+
     const getData = async (event: FormEvent<HTMLInputElement>) => {
         let {value} = event.currentTarget
         value = value.replace(/\D/g, '')
         if(value.length === 8){
-            const data = await useFetch(`https://viacep.com.br/ws/${value}/json/`)
-            console.log(data)
+            const data = await useFetch(`https://viacep.com.br/ws/${value}/json/`) //Check cep
+            
+            await populateCity(data.uf) //Take cities
+            
+            //Set input values
+            setValue('uf', data.uf)
+            setValue('city', data.localidade)
+            setValue('district', data.bairro)
+            setValue('street', data.logradouro)
         }
-        //Pendente ....
     }
     
 
@@ -44,11 +54,9 @@ export const Form = () => {
             <Field.Text label={'cep'} labelName={'CEP'} register={register('cep', {onBlur:getData})} error={errors.cep?.message} onchange={handleMask} maxlength={9} />
 
             <SelectBlock>
-                <SelectContextProvider>
                     <SelectState label={'uf'} labelName={'Estado'} register={register('uf')} />
 
                     <SelectCity label={'city'} labelName={'Cidade'} register={register('city')} />
-                </SelectContextProvider>
             </SelectBlock>
 
             <Field.Text label={'district'} labelName={'Bairro'} register={register('district')} />
