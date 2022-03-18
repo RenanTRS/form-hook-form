@@ -14,7 +14,7 @@ import { SelectState, SelectCity } from './Field/Selects';
 import { SelectContextProvider } from '../../context/SelectContext';
 
 export const Form = () => {
-    const {register, handleSubmit, formState: {errors}} = useForm<FormInputType>({resolver: yupResolver(schema)});
+    const {register, handleSubmit, setValue, formState: {errors}} = useForm<FormInputType>({resolver: yupResolver(schema)});
     
     const newUser = (data: FormInputType) => {
         console.log(data)
