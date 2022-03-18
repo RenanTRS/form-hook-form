@@ -6,7 +6,8 @@ import {Container} from './style'
 import { Field } from './Field'
 import { useMask } from '../../hooks/useMask'
 import { useFetch } from '../../hooks/useFetch'
-import { FormEvent, useCallback } from 'react'
+import { FormEvent, useCallback, useContext } from 'react'
+import { SelectContext } from '../../context/SelectContext';
 import { SelectBlock } from './Field/style';
 import { FormInputType } from '../../types/Form';
 import { SelectState, SelectCity } from './Field/Selects';
