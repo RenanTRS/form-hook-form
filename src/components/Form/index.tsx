@@ -8,21 +8,12 @@ import { useMask } from '../../hooks/useMask'
 import { useFetch } from '../../hooks/useFetch'
 import { FormEvent, useCallback } from 'react'
 import { SelectBlock } from './Field/style';
+import { FormInputType } from '../../types/Form';
+import { SelectState, SelectCity } from './Field/Selects';
+import { SelectContextProvider } from '../../context/SelectContext';
 
 export const Form = () => {
-
-    type FormInputType = {
-        name?: string;
-        email?: string;
-        cpf?: string;
-        cep?: string;
-        uf?: string;
-        city?: string;
-        district?: string;
-        street?: string;
-        number?: string;
-    }
-    const {register, handleSubmit, watch, formState: {errors}} = useForm<FormInputType>({resolver: yupResolver(schema)});
+    const {register, handleSubmit, formState: {errors}} = useForm<FormInputType>({resolver: yupResolver(schema)});
     
     const newUser = (data: FormInputType) => {
         console.log(data)
@@ -30,15 +21,17 @@ export const Form = () => {
     const handleMask = useCallback((event: FormEvent<HTMLInputElement>)=>{
         useMask(event)
     },[])
-
+    
     const getData = async (event: FormEvent<HTMLInputElement>) => {
         let {value} = event.currentTarget
         value = value.replace(/\D/g, '')
         if(value.length === 8){
             const data = await useFetch(`https://viacep.com.br/ws/${value}/json/`)
-            //console.log(data)
+            console.log(data)
         }
+        //Pendente ....
     }
+    
 
     return (
         <Container onSubmit={handleSubmit(newUser)}>
@@ -48,12 +41,14 @@ export const Form = () => {
 
             <Field.Text label={'cpf'} labelName={'CPF'} register={register('cpf')} error={errors.cpf?.message} onchange={handleMask} maxlength={14} />
 
-            <Field.Text label={'cep'} labelName={'CEP'} register={register('cep',{onBlur:getData})} error={errors.cep?.message} onchange={handleMask} maxlength={9} />
+            <Field.Text label={'cep'} labelName={'CEP'} register={register('cep', {onBlur:getData})} error={errors.cep?.message} onchange={handleMask} maxlength={9} />
 
             <SelectBlock>
-                <Field.Select label={'uf'} labelName={'Estado'} register={register('uf')} />
+                <SelectContextProvider>
+                    <SelectState label={'uf'} labelName={'Estado'} register={register('uf')} />
 
-                <Field.Select label={'city'} labelName={'Cidade'} register={register('city')} />
+                    <SelectCity label={'city'} labelName={'Cidade'} register={register('city')} />
+                </SelectContextProvider>
             </SelectBlock>
 
             <Field.Text label={'district'} labelName={'Bairro'} register={register('district')} />
