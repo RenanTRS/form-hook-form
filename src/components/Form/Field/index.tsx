@@ -1,7 +1,6 @@
 import { InputBlock } from "./style";
 import { InputProps } from "../../../types/Form"
 
-
 const Text = ({label, labelName, register, error, onchange, maxlength}: InputProps) => {
     return (
         <InputBlock>
@@ -19,7 +18,6 @@ const Select = ({label, labelName, register, children, populate}: InputProps) =>
             <select {...register} id={label} onChange={populate}>
                 {children}
             </select>
-
         </div>
     )
 }
