@@ -11,7 +11,6 @@ import { SelectContext } from '../../context/SelectContext';
 import { SelectBlock } from './Field/style';
 import { FormInputType } from '../../types/Form';
 import { SelectState, SelectCity } from './Field/Selects';
-import { SelectContextProvider } from '../../context/SelectContext';
 
 export const Form = () => {
     const {register, handleSubmit, setValue, formState: {errors}} = useForm<FormInputType>({resolver: yupResolver(schema)});
@@ -19,10 +18,14 @@ export const Form = () => {
     const newUser = (data: FormInputType) => {
         console.log(data)
     }
+
+    //Masks
     const handleMask = useCallback((event: FormEvent<HTMLInputElement>)=>{
         useMask(event)
     },[])
     
+    const {populateCity} = useContext(SelectContext) //Context
+
     const getData = async (event: FormEvent<HTMLInputElement>) => {
         let {value} = event.currentTarget
         value = value.replace(/\D/g, '')
@@ -37,7 +40,6 @@ export const Form = () => {
             setValue('district', data.bairro)
             setValue('street', data.logradouro)
         }
-        //Pendente ....
     }
     
 
@@ -52,11 +54,9 @@ export const Form = () => {
             <Field.Text label={'cep'} labelName={'CEP'} register={register('cep', {onBlur:getData})} error={errors.cep?.message} onchange={handleMask} maxlength={9} />
 
             <SelectBlock>
-                <SelectContextProvider>
                     <SelectState label={'uf'} labelName={'Estado'} register={register('uf')} />
 
                     <SelectCity label={'city'} labelName={'Cidade'} register={register('city')} />
-                </SelectContextProvider>
             </SelectBlock>
 
             <Field.Text label={'district'} labelName={'Bairro'} register={register('district')} />
