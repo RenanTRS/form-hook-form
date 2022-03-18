@@ -8,8 +8,7 @@ export interface IContextProps {
 export interface ISelectContext {
     ufs: UfType[];
     setUfs: Dispatch<SetStateAction<UfType[]>>;
-    city: boolean;
-    setCity: Dispatch<SetStateAction<boolean>>;
     cities?: CitiesType[];
     setCities: Dispatch<SetStateAction<CitiesType[]>>
+    populateCity: (uf: string) => void;
 }
