@@ -32,12 +32,27 @@ export const InputBlock = styled.div`
 `
 export const SelectBlock = styled.div`
     display: flex;
-    justify-content: space-between;
-    
+    justify-content: space-around;
     padding-bottom: 2rem;
+    
+    @media (max-width: 415px){
+        flex-wrap:wrap;
+        gap: 2rem;
+        width: 100%;
+    }
+    @media (min-width: 415px){
+    }
+
     div{
         display: flex;
         flex-direction: column;
+        
+        @media (max-width: 415px){
+            width: 100%;
+        }
+        @media (min-width: 416px){
+            width: 45%;
+        }
     }
     label{
         color: ${props => props.theme.colors.text};
@@ -53,7 +68,6 @@ export const SelectBlock = styled.div`
         border-radius: .6rem .6rem 0 0;
 
         background: ${props => props.theme.colors.select};
-
         option{
             padding: 4rem;
         }

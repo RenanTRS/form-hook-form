@@ -7,9 +7,14 @@ export const Container = styled.form`
 
     padding: 2rem;
 
-    border-radius: 1rem;
+    width: 100%;
+    
+    @media (min-width: 770px){
+        border-radius: 1rem;
+        
+        width: 50%;
 
-    width: 50%;
+    }
 
     button {
         background: ${props => props.theme.colors.submit};
