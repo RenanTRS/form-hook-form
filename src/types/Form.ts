@@ -2,6 +2,7 @@ import { FormEvent, ReactNode } from "react";
 import { UseFormRegisterReturn } from "react-hook-form"
 
 export type InputProps = {
+    type?: string;
     label: string;
     labelName: string;
     register?: UseFormRegisterReturn;

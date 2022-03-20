@@ -10,6 +10,15 @@ const Text = ({label, labelName, register, error, onchange, maxlength}: InputPro
         </InputBlock>
     )
 }
+const Number = ({label, labelName, register, error, onchange, maxlength}: InputProps) => {
+    return (
+        <InputBlock>
+            <label htmlFor={label}>{labelName}</label>
+            <input type="text" inputMode="numeric" {...register} id={label} onChange={onchange} maxLength={maxlength} />
+            {error && <p>{error}</p>}
+        </InputBlock>
+    )
+}
 
 const Select = ({label, labelName, register, children, populate}: InputProps) => {
     return(
@@ -21,4 +30,4 @@ const Select = ({label, labelName, register, children, populate}: InputProps) =>
         </div>
     )
 }
-export const Field = {Text, Select}
+export const Field = {Text, Select, Number}
