@@ -49,9 +49,14 @@ export const Form = () => {
             
             <Field.Text label={'email'} labelName={'Email'} register={register('email')} error={errors.email?.message}/>
 
-            <Field.Text label={'cpf'} labelName={'CPF'} register={register('cpf')} error={errors.cpf?.message} onchange={handleMask} maxlength={14} />
+            <Field.Number label={'cpf'} labelName={'CPF'} register={register('cpf')} error={errors.cpf?.message} onchange={handleMask} maxlength={14} />
 
-            <Field.Text label={'cep'} labelName={'CEP'} register={register('cep', {onBlur:getData})} error={errors.cep?.message} onchange={handleMask} maxlength={9} />
+            {/*
+            <Field.Text label={'cpf'} labelName={'CPF'} register={register('cpf')} error={errors.cpf?.message} onchange={handleMask} maxlength={14} />
+            */}
+
+            <Field.Number label={'cep'} labelName={'CEP'} register={register('cep', {onBlur:getData})} error={errors.cep?.message} onchange={handleMask} maxlength={9} />
+
 
             <SelectBlock>
                     <SelectState label={'uf'} labelName={'Estado'} register={register('uf')} />
