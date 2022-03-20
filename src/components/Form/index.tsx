@@ -42,7 +42,6 @@ export const Form = () => {
         }
     }
     
-
     return (
         <Container onSubmit={handleSubmit(newUser)}>
             <Field.Text label={'name'} labelName={'Nome'} register={register('name')} error={errors.name?.message}/>
@@ -51,12 +50,7 @@ export const Form = () => {
 
             <Field.Number label={'cpf'} labelName={'CPF'} register={register('cpf')} error={errors.cpf?.message} onchange={handleMask} maxlength={14} />
 
-            {/*
-            <Field.Text label={'cpf'} labelName={'CPF'} register={register('cpf')} error={errors.cpf?.message} onchange={handleMask} maxlength={14} />
-            */}
-
             <Field.Number label={'cep'} labelName={'CEP'} register={register('cep', {onBlur:getData})} error={errors.cep?.message} onchange={handleMask} maxlength={9} />
-
 
             <SelectBlock>
                     <SelectState label={'uf'} labelName={'Estado'} register={register('uf')} />
@@ -68,7 +62,7 @@ export const Form = () => {
 
             <Field.Text label={'street'} labelName={'Rua'} register={register('street')} />
 
-            <Field.Text label={'number'} labelName={'Número'} register={register('number')} error={errors.number?.message} />
+            <Field.Number label={'number'} labelName={'Número'} register={register('number')} error={errors.number?.message} />
 
             <button type="submit">Enviar</button>
         </Container>
